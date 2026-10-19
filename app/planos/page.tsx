@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Check } from "@phosphor-icons/react/dist/ssr";
 import { Reveal } from "@/components/Reveal";
 import { planos } from "@/lib/planos";
+import { WHATSAPP_ORCAMENTO_URL } from "@/lib/contato";
 
 export const metadata: Metadata = {
   title: "Planos",
@@ -58,16 +58,19 @@ export default function PlanosPage() {
                       </li>
                     ))}
                   </ul>
-                  <Link
-                    href="/contato"
-                    className={`mt-10 inline-flex items-center justify-center rounded-md py-3 text-sm font-medium transition-transform active:scale-[0.98] ${
+                  <a
+                    href={WHATSAPP_ORCAMENTO_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`mt-10 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-md py-3 text-sm font-medium transition-transform active:scale-[0.98] ${
                       plano.highlight
                         ? "bg-brand text-white hover:bg-brand-hover"
                         : "border border-line bg-canvas text-ink"
                     }`}
                   >
+                    <i className="bi bi-whatsapp" aria-hidden="true" />
                     Consultar este plano
-                  </Link>
+                  </a>
                 </article>
               </Reveal>
             ))}

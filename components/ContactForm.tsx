@@ -34,10 +34,10 @@ export function ContactForm() {
   }
 
   return (
-    <section className="py-16 md:py-24">
-      <div className="mx-auto grid max-w-6xl gap-14 px-5 md:grid-cols-12 md:gap-12 md:px-8">
+    <section className="py-12 sm:py-16 md:py-24">
+      <div className="mx-auto grid max-w-6xl gap-10 px-4 sm:gap-14 sm:px-5 md:grid-cols-12 md:gap-12 md:px-8">
         <Reveal className="md:col-span-5">
-          <div className="space-y-8 border border-line bg-white p-8 md:p-10">
+          <div className="space-y-6 border border-line bg-white p-5 sm:space-y-8 sm:p-8 md:p-10">
             <div>
               <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
                 WhatsApp
@@ -107,7 +107,7 @@ export function ContactForm() {
         <Reveal delayMs={80} className="md:col-span-7">
           <form
             onSubmit={handleSubmit}
-            className="border border-line bg-canvas p-8 md:p-10"
+            className="border border-line bg-canvas p-5 sm:p-8 md:p-10"
             noValidate
           >
             <div className="grid gap-6 md:grid-cols-2">

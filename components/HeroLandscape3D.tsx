@@ -107,7 +107,7 @@ export function HeroLandscape3D({ children, className = "" }: HeroLandscape3DPro
 
   return (
     <section
-      className={`relative flex flex-col justify-between min-h-[calc(100vh-5rem)] md:min-h-[calc(100vh-6rem)] lg:h-[calc(100vh-6rem)] border-b border-[#DDE5DC] bg-gradient-to-b from-[#F7F8F3] via-[#F1F4EF]/70 to-[#F7F8F3] pt-3 sm:pt-4 md:pt-6 overflow-hidden ${className}`}
+      className={`relative flex flex-col justify-between min-h-[calc(100dvh-4rem)] sm:min-h-[calc(100vh-5rem)] md:min-h-[calc(100vh-6rem)] lg:h-[calc(100vh-6rem)] border-b border-[#DDE5DC] bg-gradient-to-b from-[#F7F8F3] via-[#F1F4EF]/70 to-[#F7F8F3] pt-2 sm:pt-4 md:pt-6 overflow-hidden ${className}`}
       aria-label="Apresentação principal Universo Paisagismo"
     >
       {/* Iluminação suave e formas orgânicas sutis de fundo */}
@@ -129,13 +129,13 @@ export function HeroLandscape3D({ children, className = "" }: HeroLandscape3DPro
 
           {/* Coluna do Card de Vídeo (Deslocado mais à direita e aumentado em 2cm) */}
           <div className="order-2 lg:order-1 lg:col-span-5 xl:col-span-5 w-full flex justify-center lg:justify-start">
-            <div className="relative w-full max-w-[330px] sm:max-w-[360px] md:max-w-[390px] lg:max-w-[370px] xl:max-w-[400px] lg:ml-14 xl:ml-20">
+            <div className="relative w-full max-w-[280px] sm:max-w-[360px] md:max-w-[390px] lg:max-w-[370px] xl:max-w-[400px] lg:ml-14 xl:ml-20">
               {/* Brilho decorativo suave de fundo */}
               <div className="absolute -inset-2 rounded-[2rem] bg-gradient-to-tr from-[#C97832]/15 via-[#2F6B4F]/12 to-transparent blur-xl" />
 
               {/* Card Container com Acabamento Editorial Premium (+2cm) */}
               <div
-                className="group relative overflow-hidden rounded-[1.8rem] border border-[#DDE5DC] bg-stone-950 shadow-[0_20px_50px_rgba(23,63,42,0.14)] backdrop-blur-md transition-all duration-300 hover:shadow-[0_25px_60px_rgba(23,63,42,0.20)] max-h-[52vh] sm:max-h-[54vh] md:max-h-[440px] lg:max-h-[460px]"
+                className="group relative overflow-hidden rounded-[1.5rem] sm:rounded-[1.8rem] border border-[#DDE5DC] bg-stone-950 shadow-[0_20px_50px_rgba(23,63,42,0.14)] backdrop-blur-md transition-all duration-300 hover:shadow-[0_25px_60px_rgba(23,63,42,0.20)] max-h-[42dvh] sm:max-h-[54vh] md:max-h-[440px] lg:max-h-[460px]"
                 style={{ aspectRatio }}
               >
                 {/* Selo Editorial Discreto: PROJETO REAL • UNIVERSO PAISAGISMO */}

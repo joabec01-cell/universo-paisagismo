@@ -1,7 +1,8 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Instrument_Serif, JetBrains_Mono, Outfit } from "next/font/google";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
+import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -39,6 +40,12 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -58,8 +65,11 @@ export default function RootLayout({
       <body className="font-sans bg-warmwhite text-forest selection:bg-sand/40 selection:text-forest">
         <div className="grain" aria-hidden />
         <SiteHeader />
-        <main className="pt-20 md:pt-24 min-h-[calc(100vh-80px)] overflow-x-hidden">{children}</main>
+        <main className="min-h-[calc(100dvh-4rem)] overflow-x-hidden pt-16 sm:pt-20 md:min-h-[calc(100vh-80px)] md:pt-24">
+          {children}
+        </main>
         <SiteFooter />
+        <WhatsAppFloat />
       </body>
     </html>
   );

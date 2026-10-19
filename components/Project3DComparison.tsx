@@ -2,8 +2,8 @@
 
 import { useState, useRef, useCallback, useEffect } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { Reveal } from "@/components/Reveal";
+import { WHATSAPP_MESSAGES, whatsappUrl } from "@/lib/contato";
 
 export type ComparisonProject = {
   id: string;
@@ -323,16 +323,15 @@ export function Project3DComparison() {
             {/* 5. CTA DA SEÇÃO */}
             <Reveal delayMs={400}>
               <div className="pt-1">
-                <Link
-                  href="/contato"
-                  className="group inline-flex w-full sm:w-auto items-center justify-center gap-2.5 rounded-xl bg-[#B9683A] px-7 py-4 text-sm sm:text-base font-medium text-[#FAF9F5] shadow-[0_8px_24px_rgba(185,104,58,0.3)] transition-all duration-300 hover:bg-[#C49A63] hover:text-[#0D1F16] hover:-translate-y-0.5 hover:shadow-[0_12px_28px_rgba(196,154,99,0.35)] active:scale-[0.98]"
+                <a
+                  href={whatsappUrl(WHATSAPP_MESSAGES.estudo3d)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex min-h-12 w-full sm:w-auto items-center justify-center gap-2.5 rounded-xl bg-[#B9683A] px-7 py-4 text-sm sm:text-base font-medium text-[#FAF9F5] shadow-[0_8px_24px_rgba(185,104,58,0.3)] transition-all duration-300 hover:bg-[#C49A63] hover:text-[#0D1F16] hover:-translate-y-0.5 hover:shadow-[0_12px_28px_rgba(196,154,99,0.35)] active:scale-[0.98]"
                 >
+                  <i className="bi bi-whatsapp text-base" aria-hidden="true" />
                   <span>Solicitar estudo 3D</span>
-                  <i
-                    className="bi bi-arrow-up-right text-sm transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                    aria-hidden="true"
-                  />
-                </Link>
+                </a>
               </div>
             </Reveal>
           </div>

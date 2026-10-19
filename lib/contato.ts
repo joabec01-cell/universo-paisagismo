@@ -24,4 +24,17 @@ export const WHATSAPP_MESSAGES = {
     "Olá! Vim pelo site da Universo Paisagismo e gostaria de conversar sobre um projeto paisagístico.",
   contato:
     "Olá! Estou na página de contato do site e gostaria de falar com a equipe da Universo Paisagismo.",
+  planoProjeto:
+    "Olá! Vim pelo site e tenho interesse no plano de Projeto Paisagístico. Gostaria de um orçamento.",
+  planoCompleto:
+    "Olá! Vim pelo site e tenho interesse no plano Projeto + Execução. Gostaria de solicitar um orçamento.",
+  planoManutencao:
+    "Olá! Vim pelo site e tenho interesse em Manutenção e Cuidados. Gostaria de falar com um especialista.",
+  avaliacao:
+    "Olá! Vim pelo site e gostaria de solicitar uma avaliação do meu espaço.",
+  estudo3d:
+    "Olá! Vim pelo site e gostaria de solicitar um estudo 3D do meu espaço.",
 } as const;
+
+/** URL padrão para CTAs de “Solicitar orçamento” */
+export const WHATSAPP_ORCAMENTO_URL = whatsappUrl(WHATSAPP_MESSAGES.orcamento);

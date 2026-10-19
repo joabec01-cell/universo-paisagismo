@@ -11,6 +11,7 @@ import { TestimonialsSection } from "@/components/TestimonialsSection";
 import { PlansCTASection } from "@/components/PlansCTASection";
 import { FinalCTASection } from "@/components/FinalCTASection";
 import { portfolioItems } from "@/lib/portfolio";
+import { WHATSAPP_ORCAMENTO_URL } from "@/lib/contato";
 
 const pillars = [
   {
@@ -52,28 +53,30 @@ export default function HomePage() {
           </div>
 
           {/* Headline com forte presença visual ampliada em +2cm */}
-          <h1 className="mt-3 font-serif text-3xl sm:text-5xl md:text-[3.4rem] lg:text-[3.9rem] xl:text-[4.35rem] leading-[1.06] md:leading-[1.03] tracking-tight text-[#173F2A]">
+          <h1 className="mt-2.5 sm:mt-3 font-serif text-[1.75rem] leading-[1.1] tracking-tight text-[#173F2A] sm:text-5xl sm:leading-[1.06] md:text-[3.4rem] md:leading-[1.03] lg:text-[3.9rem] xl:text-[4.35rem]">
             Do projeto ao jardim.
-            <span className="block mt-1">
-              Veja antes. Viva <span className="text-[#C97832] italic font-normal">depois</span>.
+            <span className="mt-1 block">
+              Veja antes. Viva <span className="font-normal italic text-[#C97832]">depois</span>.
             </span>
           </h1>
 
           {/* Descrição com tamanho ampliado (+2cm) */}
-          <p className="mt-3.5 sm:mt-4 max-w-[50ch] text-base sm:text-lg md:text-xl xl:text-[1.35rem] leading-relaxed text-[#526B45] text-center lg:text-left mx-auto lg:mx-0">
+          <p className="mx-auto mt-3 max-w-[50ch] text-center text-[0.95rem] leading-relaxed text-[#526B45] sm:mt-4 sm:text-lg md:text-xl xl:text-[1.35rem] lg:mx-0 lg:text-left">
             Paisagismo personalizado, visualização 3D e execução profissional para transformar espaços em ambientes únicos.
           </p>
 
           {/* CTAs Profissionais e Ampliados */}
           <div className="mt-5 sm:mt-6 flex flex-col gap-3.5 sm:flex-row sm:items-center justify-center lg:justify-start w-full">
-            {/* CTA Principal */}
-            <Link
-              href="/contato"
-              className="inline-flex items-center justify-center gap-2.5 rounded-lg bg-[#2F6B4F] px-7 py-3.5 sm:px-8 sm:py-4 text-base sm:text-lg font-medium text-white shadow-[0_4px_16px_rgba(47,107,79,0.20)] transition-all duration-300 hover:bg-[#C97832] hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(201,120,50,0.30)] active:scale-[0.98]"
+            {/* CTA Principal → WhatsApp */}
+            <a
+              href={WHATSAPP_ORCAMENTO_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-12 items-center justify-center gap-2.5 rounded-lg bg-[#2F6B4F] px-7 py-3.5 sm:px-8 sm:py-4 text-base sm:text-lg font-medium text-white shadow-[0_4px_16px_rgba(47,107,79,0.20)] transition-all duration-300 hover:bg-[#C97832] hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(201,120,50,0.30)] active:scale-[0.98]"
             >
+              <i className="bi bi-whatsapp text-lg sm:text-xl" aria-hidden="true" />
               <span>Solicitar orçamento</span>
-              <i className="bi bi-arrow-up-right text-sm sm:text-base" aria-hidden="true" />
-            </Link>
+            </a>
 
             {/* CTA Secundário */}
             <Link
@@ -88,7 +91,7 @@ export default function HomePage() {
       </HeroLandscape3D>
 
       {/* 2. SEÇÃO — APRESENTAÇÃO DA UNIVERSO (Editorial / Fundo verde-sálvia claro) */}
-      <section className="relative overflow-hidden border-b border-[#E2E8DF] bg-[#F1F4EF] py-24 sm:py-28 lg:py-36">
+      <section className="relative overflow-hidden border-b border-[#E2E8DF] bg-[#F1F4EF] py-16 sm:py-28 lg:py-36">
         {/* Marca d'água sutil da marca no background para sensação arquitetônica premium */}
         <div
           className="pointer-events-none absolute -right-12 -bottom-16 w-[380px] sm:w-[500px] lg:w-[620px] select-none opacity-[0.045] mix-blend-multiply transition-opacity duration-1000"
@@ -160,7 +163,7 @@ export default function HomePage() {
       </section>
 
       {/* 3. SEÇÃO — NOSSO PROCESSO / CLAREZA EM CADA ETAPA */}
-      <section className="relative border-b border-[#E2E8DF] bg-[#FAF9F5] py-24 md:py-32">
+      <section className="relative border-b border-[#E2E8DF] bg-[#FAF9F5] py-16 md:py-32">
         <div className="mx-auto max-w-6xl px-5 md:px-8">
           {/* Topo: Eyebrow + Título + Parágrafo */}
           <div className="max-w-3xl">

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, CheckCircle } from "@phosphor-icons/react/dist/ssr";
+import { CheckCircle } from "@phosphor-icons/react/dist/ssr";
 import { Reveal } from "@/components/Reveal";
+import { WHATSAPP_ORCAMENTO_URL } from "@/lib/contato";
 
 export const metadata: Metadata = {
   title: "Sobre",
@@ -61,13 +61,15 @@ export default function SobrePage() {
                 </li>
               ))}
             </ul>
-            <Link
-              href="/contato"
-              className="mt-12 inline-flex items-center gap-2 rounded-md bg-brand px-6 py-3 text-sm font-medium text-white transition-transform hover:bg-brand-hover active:scale-[0.98]"
+            <a
+              href={WHATSAPP_ORCAMENTO_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-12 inline-flex min-h-12 items-center gap-2 rounded-md bg-brand px-6 py-3 text-sm font-medium text-white transition-transform hover:bg-brand-hover active:scale-[0.98]"
             >
+              <i className="bi bi-whatsapp text-base" aria-hidden="true" />
               Falar com a equipe
-              <ArrowRight size={18} weight="bold" aria-hidden />
-            </Link>
+            </a>
           </Reveal>
 
           <Reveal delayMs={100} className="flex justify-center">

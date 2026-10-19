@@ -1,13 +1,12 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
 import { Reveal } from "@/components/Reveal";
-import { WHATSAPP_MESSAGES, whatsappUrl } from "@/lib/contato";
+import { WHATSAPP_MESSAGES, WHATSAPP_ORCAMENTO_URL, whatsappUrl } from "@/lib/contato";
 
 export function FinalCTASection() {
   return (
-    <section className="relative min-h-[550px] sm:min-h-[580px] lg:min-h-[620px] flex items-center justify-center overflow-hidden bg-[#0D1F16] py-24 sm:py-28 lg:py-32 text-[#FAF9F5]">
+    <section className="relative flex min-h-[480px] items-center justify-center overflow-hidden bg-[#0D1F16] py-16 text-[#FAF9F5] sm:min-h-[580px] sm:py-28 lg:min-h-[620px] lg:py-32">
       {/* Imagem de Fundo de um Jardim Real Finalizado */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -57,17 +56,16 @@ export function FinalCTASection() {
         <Reveal delayMs={300}>
           {/* Botões de Conversão */}
           <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-4">
-            {/* Botão Principal: Solicitar Orçamento */}
-            <Link
-              href="/contato"
-              className="group inline-flex w-full sm:w-auto items-center justify-center gap-2.5 rounded-xl bg-[#B9683A] px-8 py-4 text-base font-semibold text-[#FAF9F5] shadow-[0_10px_30px_rgba(185,104,58,0.35)] transition-all duration-300 hover:bg-[#C49A63] hover:text-[#0D1F16] hover:-translate-y-0.5 hover:shadow-[0_14px_35px_rgba(196,154,99,0.4)] active:scale-[0.98]"
+            {/* Botão Principal: Solicitar Orçamento → WhatsApp */}
+            <a
+              href={WHATSAPP_ORCAMENTO_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex min-h-12 w-full sm:w-auto items-center justify-center gap-2.5 rounded-xl bg-[#B9683A] px-8 py-4 text-base font-semibold text-[#FAF9F5] shadow-[0_10px_30px_rgba(185,104,58,0.35)] transition-all duration-300 hover:bg-[#C49A63] hover:text-[#0D1F16] hover:-translate-y-0.5 hover:shadow-[0_14px_35px_rgba(196,154,99,0.4)] active:scale-[0.98]"
             >
+              <i className="bi bi-whatsapp text-lg" aria-hidden="true" />
               <span>Solicitar orçamento</span>
-              <i
-                className="bi bi-arrow-up-right text-sm transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                aria-hidden="true"
-              />
-            </Link>
+            </a>
 
             {/* Botão Secundário: Falar pelo WhatsApp */}
             <a

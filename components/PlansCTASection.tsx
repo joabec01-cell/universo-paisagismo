@@ -1,11 +1,11 @@
 "use client";
 
-import Link from "next/link";
 import { Reveal } from "@/components/Reveal";
+import { WHATSAPP_MESSAGES, whatsappUrl } from "@/lib/contato";
 
 export function PlansCTASection() {
   return (
-    <section className="relative border-b border-[#1F3327] bg-[#0D1F16] text-[#FAF9F5] py-24 sm:py-28 lg:py-36 overflow-hidden">
+    <section className="relative overflow-hidden border-b border-[#1F3327] bg-[#0D1F16] py-16 text-[#FAF9F5] sm:py-28 lg:py-36">
       {/* Iluminação radial sutil */}
       <div
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_center,rgba(196,154,99,0.12),transparent_70%)]"
@@ -96,13 +96,15 @@ export function PlansCTASection() {
                 <p className="text-lg font-serif text-[#FAF9F5] mt-0.5">
                   Orçamento personalizado
                 </p>
-                <Link
-                  href="/contato?servico=projeto"
-                  className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-[#C49A63]/40 bg-[#172D21] px-5 py-3 text-sm font-medium text-[#FAF9F5] transition-all duration-300 hover:border-[#C49A63] hover:bg-[#C49A63] hover:text-[#0D1F16]"
+                <a
+                  href={whatsappUrl(WHATSAPP_MESSAGES.planoProjeto)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-4 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl border border-[#C49A63]/40 bg-[#172D21] px-5 py-3 text-sm font-medium text-[#FAF9F5] transition-all duration-300 hover:border-[#C49A63] hover:bg-[#C49A63] hover:text-[#0D1F16]"
                 >
+                  <i className="bi bi-whatsapp text-base" aria-hidden="true" />
                   <span>Quero meu projeto</span>
-                  <i className="bi bi-arrow-up-right text-xs" aria-hidden="true" />
-                </Link>
+                </a>
               </div>
             </div>
           </Reveal>
@@ -168,13 +170,15 @@ export function PlansCTASection() {
                 <p className="text-lg font-serif text-[#FAF9F5] mt-0.5">
                   Orçamento personalizado
                 </p>
-                <Link
-                  href="/contato?servico=completo"
-                  className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#B9683A] px-5 py-3.5 text-sm sm:text-base font-semibold text-[#FAF9F5] shadow-[0_8px_20px_rgba(185,104,58,0.35)] transition-all duration-300 hover:bg-[#C49A63] hover:text-[#0D1F16] hover:shadow-[0_12px_28px_rgba(196,154,99,0.4)] active:scale-[0.98]"
+                <a
+                  href={whatsappUrl(WHATSAPP_MESSAGES.planoCompleto)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-4 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#B9683A] px-5 py-3.5 text-sm sm:text-base font-semibold text-[#FAF9F5] shadow-[0_8px_20px_rgba(185,104,58,0.35)] transition-all duration-300 hover:bg-[#C49A63] hover:text-[#0D1F16] hover:shadow-[0_12px_28px_rgba(196,154,99,0.4)] active:scale-[0.98]"
                 >
+                  <i className="bi bi-whatsapp text-base" aria-hidden="true" />
                   <span>Solicitar orçamento</span>
-                  <i className="bi bi-arrow-up-right text-sm" aria-hidden="true" />
-                </Link>
+                </a>
               </div>
             </div>
           </Reveal>
@@ -232,13 +236,15 @@ export function PlansCTASection() {
                 <p className="text-lg font-serif text-[#FAF9F5] mt-0.5">
                   Orçamento personalizado
                 </p>
-                <Link
-                  href="/contato?servico=manutencao"
-                  className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-[#C49A63]/40 bg-[#172D21] px-5 py-3 text-sm font-medium text-[#FAF9F5] transition-all duration-300 hover:border-[#C49A63] hover:bg-[#C49A63] hover:text-[#0D1F16]"
+                <a
+                  href={whatsappUrl(WHATSAPP_MESSAGES.planoManutencao)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-4 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl border border-[#C49A63]/40 bg-[#172D21] px-5 py-3 text-sm font-medium text-[#FAF9F5] transition-all duration-300 hover:border-[#C49A63] hover:bg-[#C49A63] hover:text-[#0D1F16]"
                 >
+                  <i className="bi bi-whatsapp text-base" aria-hidden="true" />
                   <span>Falar com especialista</span>
-                  <i className="bi bi-arrow-up-right text-xs" aria-hidden="true" />
-                </Link>
+                </a>
               </div>
             </div>
           </Reveal>
@@ -254,13 +260,15 @@ export function PlansCTASection() {
               Conte um pouco sobre o seu projeto e nós ajudamos você a definir o melhor caminho.
             </p>
             <div className="mt-7">
-              <Link
-                href="/contato"
-                className="group inline-flex items-center justify-center gap-2.5 rounded-xl bg-[#C49A63] px-8 py-4 text-sm sm:text-base font-semibold text-[#0D1F16] shadow-[0_8px_24px_rgba(196,154,99,0.3)] transition-all duration-300 hover:bg-[#B9683A] hover:text-white hover:-translate-y-0.5 hover:shadow-[0_12px_28px_rgba(185,104,58,0.35)] active:scale-[0.98]"
+              <a
+                href={whatsappUrl(WHATSAPP_MESSAGES.avaliacao)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex min-h-12 w-full sm:w-auto items-center justify-center gap-2.5 rounded-xl bg-[#C49A63] px-8 py-4 text-sm sm:text-base font-semibold text-[#0D1F16] shadow-[0_8px_24px_rgba(196,154,99,0.3)] transition-all duration-300 hover:bg-[#B9683A] hover:text-white hover:-translate-y-0.5 hover:shadow-[0_12px_28px_rgba(185,104,58,0.35)] active:scale-[0.98]"
               >
+                <i className="bi bi-whatsapp text-base" aria-hidden="true" />
                 <span>Solicitar uma avaliação</span>
-                <i className="bi bi-arrow-up-right text-sm transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true" />
-              </Link>
+              </a>
             </div>
           </div>
         </Reveal>

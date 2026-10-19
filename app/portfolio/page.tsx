@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import { Reveal } from "@/components/Reveal";
 import { PortfolioFigure } from "@/components/PortfolioFigure";
 import { portfolioItems } from "@/lib/portfolio";
+import { WHATSAPP_ORCAMENTO_URL } from "@/lib/contato";
 
 export const metadata: Metadata = {
   title: "Portfólio",
@@ -62,13 +61,15 @@ export default function PortfolioPage() {
             <p className="text-sm text-muted">
               Quer ver referências próximas ao seu tipo de imóvel?
             </p>
-            <Link
-              href="/contato"
-              className="mt-2 inline-flex min-h-10 items-center justify-center gap-2 text-sm font-medium text-ink"
+            <a
+              href={WHATSAPP_ORCAMENTO_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-2 inline-flex min-h-12 items-center justify-center gap-2 text-sm font-medium text-ink"
             >
+              <i className="bi bi-whatsapp text-base text-[#25D366]" aria-hidden="true" />
               Agendar conversa
-              <ArrowRight size={18} weight="bold" aria-hidden />
-            </Link>
+            </a>
           </Reveal>
         </div>
       </section>
