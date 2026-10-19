@@ -5,7 +5,7 @@ import { ContactForm } from "@/components/ContactForm";
 export const metadata: Metadata = {
   title: "Contato",
   description:
-    "Orçamento grátis: telefone, e-mail e Instagram da Universo Paisagismo em Belo Horizonte.",
+    "Orçamento grátis: WhatsApp, telefone para ligação, e-mail e Instagram da Universo Paisagismo em Belo Horizonte.",
 };
 
 export default function ContatoPage() {

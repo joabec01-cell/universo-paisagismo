@@ -5,10 +5,17 @@ import {
   EnvelopeSimple,
   InstagramLogo,
   MapPin,
-  PaperPlaneTilt,
   Phone,
+  WhatsappLogo,
 } from "@phosphor-icons/react";
 import { Reveal } from "@/components/Reveal";
+import {
+  PHONE_DISPLAY,
+  PHONE_TEL,
+  WHATSAPP_DISPLAY,
+  WHATSAPP_MESSAGES,
+  whatsappUrl,
+} from "@/lib/contato";
 
 type FormState = "idle" | "sending" | "sent" | "error";
 
@@ -33,15 +40,31 @@ export function ContactForm() {
           <div className="space-y-8 border border-line bg-white p-8 md:p-10">
             <div>
               <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
-                Telefone
+                WhatsApp
               </p>
               <a
-                href="tel:+5531993915033"
+                href={whatsappUrl(WHATSAPP_MESSAGES.contato)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-1 flex min-h-10 items-center gap-2 text-sm font-medium text-ink hover:underline"
+              >
+                <WhatsappLogo size={20} weight="bold" aria-hidden />
+                {WHATSAPP_DISPLAY}
+              </a>
+              <p className="mt-1 text-xs text-muted">Mensagem com atendimento rápido</p>
+            </div>
+            <div>
+              <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
+                Ligação
+              </p>
+              <a
+                href={PHONE_TEL}
                 className="mt-1 flex min-h-10 items-center gap-2 text-sm font-medium text-ink hover:underline"
               >
                 <Phone size={20} weight="bold" aria-hidden />
-                (31) 99391-5033
+                {PHONE_DISPLAY}
               </a>
+              <p className="mt-1 text-xs text-muted">Para quem preferir falar por telefone</p>
             </div>
             <div>
               <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted">

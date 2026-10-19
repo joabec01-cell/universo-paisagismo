@@ -1,5 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
+import {
+  PHONE_DISPLAY,
+  PHONE_TEL,
+  WHATSAPP_DISPLAY,
+  WHATSAPP_MESSAGES,
+  whatsappUrl,
+} from "@/lib/contato";
 
 const navLinks = [
   { href: "/", label: "Início" },
@@ -69,13 +76,22 @@ export function SiteFooter() {
             <ul className="mt-3 space-y-1 text-sm text-[#D9C5A5]/85">
               <li>
                 <a
-                  href="https://wa.me/5531993915033"
+                  href={whatsappUrl(WHATSAPP_MESSAGES.geral)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex min-h-10 items-center gap-2.5 transition-colors hover:text-[#FAF9F5]"
                 >
                   <i className="bi bi-whatsapp text-[#25D366] text-base" aria-hidden="true" />
-                  <span>(31) 99391-5033</span>
+                  <span>WhatsApp {WHATSAPP_DISPLAY}</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href={PHONE_TEL}
+                  className="inline-flex min-h-10 items-center gap-2.5 transition-colors hover:text-[#FAF9F5]"
+                >
+                  <i className="bi bi-telephone text-[#C49A63] text-base" aria-hidden="true" />
+                  <span>Ligar {PHONE_DISPLAY}</span>
                 </a>
               </li>
               <li>
@@ -87,7 +103,7 @@ export function SiteFooter() {
                   <span>universopaisagismos@gmail.com</span>
                 </a>
               </li>
-              <li className="flex items-start gap-2.5">
+              <li className="flex items-start gap-2.5 pt-1">
                 <i className="bi bi-geo-alt text-[#C49A63] text-base mt-0.5 shrink-0" aria-hidden="true" />
                 <span>Belo Horizonte e Região Metropolitana</span>
               </li>
@@ -114,7 +130,7 @@ export function SiteFooter() {
                 <i className="bi bi-instagram text-base" />
               </a>
               <a
-                href="https://wa.me/5531993915033"
+                href={whatsappUrl(WHATSAPP_MESSAGES.geral)}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="WhatsApp da Universo Paisagismo"

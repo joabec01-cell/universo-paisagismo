@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Reveal } from "@/components/Reveal";
+import { WHATSAPP_MESSAGES, whatsappUrl } from "@/lib/contato";
 
 export function FinalCTASection() {
   return (
@@ -70,7 +71,7 @@ export function FinalCTASection() {
 
             {/* Botão Secundário: Falar pelo WhatsApp */}
             <a
-              href="https://wa.me/5531993915033?text=Ol%C3%A1%2C%20gostaria%20de%20conversar%20sobre%20um%20projeto%20paisag%C3%ADstico."
+              href={whatsappUrl(WHATSAPP_MESSAGES.projeto)}
               target="_blank"
               rel="noopener noreferrer"
               className="group inline-flex w-full sm:w-auto items-center justify-center gap-2.5 rounded-xl border border-white/20 bg-white/5 backdrop-blur-md px-7 py-4 text-base font-medium text-[#FAF9F5] transition-all duration-300 hover:border-[#25D366]/60 hover:bg-[#25D366]/15 hover:text-white hover:-translate-y-0.5 active:scale-[0.98]"
