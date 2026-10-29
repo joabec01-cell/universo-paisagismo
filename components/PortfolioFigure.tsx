@@ -24,6 +24,7 @@ export function PortfolioFigure({
     (seed
       ? `https://picsum.photos/seed/${encodeURIComponent(seed)}/1600/1200`
       : "/portfolio/01.jpeg");
+  const isSvg = /\.svg($|\?)/i.test(src);
 
   return (
     <figure className={`relative overflow-hidden bg-[#FAF9F5] flex items-center justify-center ${className}`}>
@@ -35,6 +36,7 @@ export function PortfolioFigure({
         className={`h-full w-full ${fit === "contain" ? "object-contain p-1" : "object-cover"} transition-transform duration-700 ease-out group-hover:scale-[1.02]`}
         sizes={sizes}
         priority={priority}
+        unoptimized={isSvg}
       />
     </figure>
   );

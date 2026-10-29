@@ -3,6 +3,7 @@ import { Instrument_Serif, JetBrains_Mono, Outfit } from "next/font/google";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
+import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -25,6 +26,7 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Universo Paisagismo | Projetos e jardins em Belo Horizonte",
     template: "%s | Universo Paisagismo",
@@ -37,6 +39,7 @@ export const metadata: Metadata = {
       "Transforme seu jardim com projetos paisagísticos, execução profissional e manutenção.",
     locale: "pt_BR",
     type: "website",
+    url: SITE_URL,
   },
 };
 

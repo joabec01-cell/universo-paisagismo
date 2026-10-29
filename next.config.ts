@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  poweredByHeader: false,
+  compress: true,
   transpilePackages: [
     "three",
     "@react-three/fiber",
@@ -8,6 +10,7 @@ const nextConfig: NextConfig = {
     "@phosphor-icons/react",
   ],
   images: {
+    formats: ["image/avif", "image/webp"],
     remotePatterns: [
       { protocol: "https", hostname: "picsum.photos", pathname: "/**" },
     ],

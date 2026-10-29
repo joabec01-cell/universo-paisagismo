@@ -1,15 +1,24 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
-import Image from "next/image";
 import { PortfolioFigure } from "@/components/PortfolioFigure";
+import { WorksWheel, type WorksWheelItem } from "@/components/ui/works-wheel";
 import type { PortfolioItem } from "@/lib/portfolio";
 
 export function PortfolioItemCard({ item }: { item: PortfolioItem }) {
   const images = item.images ?? [];
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+
+  const wheelItems = useMemo<WorksWheelItem[]>(
+    () =>
+      images.map((src, index) => ({
+        title: String(index + 1).padStart(2, "0"),
+        image: src,
+      })),
+    [images]
+  );
 
   useEffect(() => {
     setMounted(true);
@@ -46,6 +55,10 @@ export function PortfolioItemCard({ item }: { item: PortfolioItem }) {
         {images.length > 0 ? (
           <p className="mt-5 font-mono text-[11px] uppercase tracking-[0.18em] text-[#C97832]">
             Ver todas as imagens
+          </p>
+        ) : item.href ? (
+          <p className="mt-5 font-mono text-[11px] uppercase tracking-[0.18em] text-[#C97832]">
+            {item.slug === "instagram" ? "Ver no Instagram" : "Abrir conversa"}
           </p>
         ) : null}
       </div>
@@ -88,7 +101,7 @@ export function PortfolioItemCard({ item }: { item: PortfolioItem }) {
               aria-modal="true"
               aria-label={item.title}
             >
-              <div className="flex items-center justify-between gap-4 px-4 py-4 pt-[max(1rem,env(safe-area-inset-top))] sm:px-8">
+              <div className="relative z-10 flex items-center justify-between gap-4 px-4 py-4 pt-[max(1rem,env(safe-area-inset-top))] sm:px-8">
                 <div>
                   <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#C49A63]">
                     {item.tag}
@@ -105,20 +118,8 @@ export function PortfolioItemCard({ item }: { item: PortfolioItem }) {
                   <i className="bi bi-x-lg text-lg" aria-hidden="true" />
                 </button>
               </div>
-              <div className="min-h-0 flex-1 overflow-y-auto px-5 pb-10 sm:px-8">
-                <div className="mx-auto grid max-w-6xl gap-4 sm:grid-cols-2 sm:gap-6">
-                  {images.map((src, index) => (
-                    <Image
-                      key={src}
-                      src={src}
-                      alt={`${item.title} ${index + 1} — Universo Paisagismo`}
-                      width={1600}
-                      height={1200}
-                      sizes="(max-width: 640px) 100vw, 50vw"
-                      className="h-auto w-full rounded-xl bg-[#0D1F16] object-contain"
-                    />
-                  ))}
-                </div>
+              <div className="min-h-0 flex-1">
+                <WorksWheel items={wheelItems} label={item.title} className="h-full min-h-0" />
               </div>
             </div>,
             document.body
