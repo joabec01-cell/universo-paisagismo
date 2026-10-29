@@ -10,6 +10,8 @@ import {
 } from "@phosphor-icons/react";
 import { Reveal } from "@/components/Reveal";
 import {
+  CONTACT_EMAIL,
+  FORMSUBMIT_URL,
   PHONE_DISPLAY,
   PHONE_TEL,
   WHATSAPP_DISPLAY,
@@ -22,15 +24,44 @@ type FormState = "idle" | "sending" | "sent" | "error";
 export function ContactForm() {
   const [state, setState] = useState<FormState>("idle");
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setState("sending");
     const form = e.currentTarget;
-    window.setTimeout(() => {
+    const data = new FormData(form);
+    if (String(data.get("_honey") || "").trim()) {
       form.reset();
       setState("sent");
-      window.setTimeout(() => setState("idle"), 4000);
-    }, 700);
+      return;
+    }
+
+    setState("sending");
+    try {
+      const response = await fetch(FORMSUBMIT_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          nome: data.get("nome"),
+          email: data.get("email"),
+          telefone: data.get("telefone") || "Não informado",
+          mensagem: data.get("mensagem"),
+          _subject: "Pedido de orçamento pelo site — Universo Paisagismo",
+          _template: "table",
+          _captcha: "false",
+          _replyto: data.get("email"),
+        }),
+      });
+      const payload = (await response.json().catch(() => null)) as { success?: string | boolean } | null;
+      if (!response.ok || (payload && payload.success !== "true" && payload.success !== true)) {
+        throw new Error("formsubmit");
+      }
+      form.reset();
+      setState("sent");
+    } catch {
+      setState("error");
+    }
   }
 
   return (
@@ -71,11 +102,11 @@ export function ContactForm() {
                 E-mail
               </p>
               <a
-                href="mailto:universopaisagismos@gmail.com"
+                href={`mailto:${CONTACT_EMAIL}`}
                 className="mt-1 flex min-h-10 items-center gap-2 break-all text-sm font-medium text-ink hover:underline"
               >
                 <EnvelopeSimple className="shrink-0" size={20} weight="bold" />
-                universopaisagismos@gmail.com
+                {CONTACT_EMAIL}
               </a>
             </div>
             <div>
@@ -110,6 +141,14 @@ export function ContactForm() {
             className="border border-line bg-canvas p-5 sm:p-8 md:p-10"
             noValidate
           >
+            <input
+              type="text"
+              name="_honey"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              className="hidden"
+            />
             <div className="grid gap-6 md:grid-cols-2">
               <div className="flex flex-col gap-2 md:col-span-2">
                 <label htmlFor="nome" className="text-sm font-medium text-ink">
@@ -164,16 +203,14 @@ export function ContactForm() {
                   placeholder="Bairro, tipo de imóvel, metragem aproximada e o que imagina para o espaço."
                 />
                 <p className="text-xs text-muted">
-                  Este formulário é uma demonstração no site estático. Para envio real,
-                  conecte a um backend ou serviço de formulários.
+                  A mensagem é enviada para o e-mail da Universo Paisagismo.
                 </p>
               </div>
             </div>
 
             {state === "sent" ? (
               <p className="mt-6 text-sm text-accent" role="status">
-                Registramos sua mensagem nesta demonstração. Use o telefone ou e-mail para
-                contato imediato.
+                Mensagem enviada. Em breve retornamos pelo e-mail ou telefone informado.
               </p>
             ) : null}
             {state === "error" ? (

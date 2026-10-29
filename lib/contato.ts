@@ -7,6 +7,10 @@ export const PHONE_NUMBER = "5537998242377";
 export const PHONE_DISPLAY = "(37) 99824-2377";
 export const PHONE_TEL = `tel:+${PHONE_NUMBER}`;
 
+/** E-mail que recebe os pedidos do formulário via FormSubmit */
+export const CONTACT_EMAIL = "universopaisagismos@gmail.com";
+export const FORMSUBMIT_URL = `https://formsubmit.co/ajax/${CONTACT_EMAIL}`;
+
 const DEFAULT_WHATSAPP_MESSAGE =
   "Olá! Vim pelo site da Universo Paisagismo e gostaria de conversar sobre um projeto.";
 
