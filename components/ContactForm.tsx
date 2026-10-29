@@ -11,9 +11,10 @@ import {
 import { Reveal } from "@/components/Reveal";
 import {
   CONTACT_EMAIL,
-  FORMSUBMIT_URL,
   PHONE_DISPLAY,
   PHONE_TEL,
+  WEB3FORMS_ACCESS_KEY,
+  WEB3FORMS_URL,
   WHATSAPP_DISPLAY,
   WHATSAPP_MESSAGES,
   whatsappUrl,
@@ -28,7 +29,7 @@ export function ContactForm() {
     e.preventDefault();
     const form = e.currentTarget;
     const data = new FormData(form);
-    if (String(data.get("_honey") || "").trim()) {
+    if (String(data.get("botcheck") || "") === "on") {
       form.reset();
       setState("sent");
       return;
@@ -36,26 +37,25 @@ export function ContactForm() {
 
     setState("sending");
     try {
-      const response = await fetch(FORMSUBMIT_URL, {
+      const response = await fetch(WEB3FORMS_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
         body: JSON.stringify({
-          nome: data.get("nome"),
+          access_key: WEB3FORMS_ACCESS_KEY,
+          subject: "Pedido de orçamento pelo site — Universo Paisagismo",
+          from_name: "Site Universo Paisagismo",
+          name: data.get("nome"),
           email: data.get("email"),
-          telefone: data.get("telefone") || "Não informado",
-          mensagem: data.get("mensagem"),
-          _subject: "Pedido de orçamento pelo site — Universo Paisagismo",
-          _template: "table",
-          _captcha: "false",
-          _replyto: data.get("email"),
+          phone: data.get("telefone") || "Não informado",
+          message: data.get("mensagem"),
         }),
       });
-      const payload = (await response.json().catch(() => null)) as { success?: string | boolean } | null;
-      if (!response.ok || (payload && payload.success !== "true" && payload.success !== true)) {
-        throw new Error("formsubmit");
+      const payload = (await response.json().catch(() => null)) as { success?: boolean } | null;
+      if (!response.ok || !payload?.success) {
+        throw new Error("web3forms");
       }
       form.reset();
       setState("sent");
@@ -141,9 +141,10 @@ export function ContactForm() {
             className="border border-line bg-canvas p-5 sm:p-8 md:p-10"
             noValidate
           >
+            <input type="hidden" name="access_key" value={WEB3FORMS_ACCESS_KEY} />
             <input
-              type="text"
-              name="_honey"
+              type="checkbox"
+              name="botcheck"
               tabIndex={-1}
               autoComplete="off"
               aria-hidden="true"
