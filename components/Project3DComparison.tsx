@@ -129,7 +129,7 @@ export function Project3DComparison() {
   };
 
   return (
-    <section className="relative border-b border-[#1F3327] bg-[#0D1F16] text-[#F4F1E9] py-24 md:py-32 overflow-hidden">
+    <section className="relative border-b border-[#1F3327] bg-[#0D1F16] text-[#F4F1E9] py-16 sm:py-24 md:py-32 overflow-hidden">
       {/* Iluminação radial sofisticada no background */}
       <div
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(196,154,99,0.12),transparent_70%)]"

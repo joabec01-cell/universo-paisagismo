@@ -120,7 +120,7 @@ export function ContactForm() {
                   name="nome"
                   required
                   autoComplete="name"
-                  className="rounded-md border border-line bg-white px-3 py-2.5 text-sm text-ink outline-none ring-brand/20 focus:ring-2"
+                  className="min-h-12 rounded-md border border-line bg-white px-3 py-2.5 text-base text-ink outline-none ring-brand/20 focus:ring-2 md:text-sm"
                   placeholder="Como podemos chamar"
                 />
               </div>
@@ -134,7 +134,7 @@ export function ContactForm() {
                   type="email"
                   required
                   autoComplete="email"
-                  className="rounded-md border border-line bg-white px-3 py-2.5 text-sm text-ink outline-none ring-brand/20 focus:ring-2"
+                  className="min-h-12 rounded-md border border-line bg-white px-3 py-2.5 text-base text-ink outline-none ring-brand/20 focus:ring-2 md:text-sm"
                   placeholder="seu@email.com"
                 />
               </div>
@@ -147,7 +147,7 @@ export function ContactForm() {
                   name="telefone"
                   type="tel"
                   autoComplete="tel"
-                  className="rounded-md border border-line bg-white px-3 py-2.5 text-sm text-ink outline-none ring-brand/20 focus:ring-2"
+                  className="min-h-12 rounded-md border border-line bg-white px-3 py-2.5 text-base text-ink outline-none ring-brand/20 focus:ring-2 md:text-sm"
                   placeholder="(31) 90000-0000"
                 />
               </div>
@@ -160,7 +160,7 @@ export function ContactForm() {
                   name="mensagem"
                   required
                   rows={5}
-                  className="resize-y rounded-md border border-line bg-white px-3 py-2.5 text-sm text-ink outline-none ring-brand/20 focus:ring-2"
+                  className="resize-y rounded-md border border-line bg-white px-3 py-2.5 text-base text-ink outline-none ring-brand/20 focus:ring-2 md:text-sm"
                   placeholder="Bairro, tipo de imóvel, metragem aproximada e o que imagina para o espaço."
                 />
                 <p className="text-xs text-muted">
@@ -185,7 +185,7 @@ export function ContactForm() {
             <button
               type="submit"
               disabled={state === "sending"}
-              className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-olive py-3.5 text-sm font-medium text-white shadow-[0_8px_24px_rgba(13,31,22,0.16)] transition-all duration-300 hover:bg-forest hover:-translate-y-0.5 hover:shadow-[0_12px_28px_rgba(13,31,22,0.24)] disabled:opacity-60 md:w-auto md:px-8 active:scale-[0.98]"
+              className="mt-8 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-lg bg-olive py-3.5 text-base font-medium text-white shadow-[0_8px_24px_rgba(13,31,22,0.16)] transition-all duration-300 hover:bg-forest hover:-translate-y-0.5 hover:shadow-[0_12px_28px_rgba(13,31,22,0.24)] disabled:opacity-60 md:w-auto md:px-8 md:text-sm active:scale-[0.98]"
             >
               {state === "sending" ? (
                 "Enviando…"

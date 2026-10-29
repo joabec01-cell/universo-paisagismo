@@ -139,9 +139,10 @@ export function HeroLandscape3D({ children, className = "" }: HeroLandscape3DPro
                 style={{ aspectRatio }}
               >
                 {/* Selo Editorial Discreto: PROJETO REAL • UNIVERSO PAISAGISMO */}
-                <div className="absolute top-3 left-3 z-20 flex items-center gap-1.5 rounded-full bg-[#0D1F16]/85 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-white/95 backdrop-blur-md border border-white/15 shadow-sm pointer-events-none">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#C97832] animate-pulse" />
-                  <span>Projeto Real • Universo Paisagismo</span>
+                <div className="absolute top-3 left-3 z-20 flex max-w-[calc(100%-1.5rem)] items-center gap-1.5 rounded-full bg-[#0D1F16]/85 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-white/95 backdrop-blur-md border border-white/15 shadow-sm pointer-events-none sm:text-[11px] sm:tracking-[0.14em]">
+                  <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#C97832] animate-pulse" />
+                  <span className="sm:hidden">Projeto real</span>
+                  <span className="hidden sm:inline">Projeto Real • Universo Paisagismo</span>
                 </div>
 
                 {/* Vídeo Preenchendo 100% da Moldura */}

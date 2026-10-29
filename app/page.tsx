@@ -72,7 +72,7 @@ export default function HomePage() {
               href={WHATSAPP_ORCAMENTO_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex min-h-12 items-center justify-center gap-2.5 rounded-lg bg-[#2F6B4F] px-7 py-3.5 sm:px-8 sm:py-4 text-base sm:text-lg font-medium text-white shadow-[0_4px_16px_rgba(47,107,79,0.20)] transition-all duration-300 hover:bg-[#C97832] hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(201,120,50,0.30)] active:scale-[0.98]"
+              className="inline-flex min-h-12 w-full items-center justify-center gap-2.5 rounded-lg bg-[#2F6B4F] px-7 py-3.5 sm:w-auto sm:px-8 sm:py-4 text-base sm:text-lg font-medium text-white shadow-[0_4px_16px_rgba(47,107,79,0.20)] transition-all duration-300 hover:bg-[#C97832] hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(201,120,50,0.30)] active:scale-[0.98]"
             >
               <i className="bi bi-whatsapp text-lg sm:text-xl" aria-hidden="true" />
               <span>Solicitar orçamento</span>
@@ -81,7 +81,7 @@ export default function HomePage() {
             {/* CTA Secundário */}
             <Link
               href="/portfolio"
-              className="group inline-flex items-center justify-center gap-2.5 rounded-lg border border-[#DDE5DC] bg-transparent px-6 py-3.5 sm:px-7 sm:py-4 text-base sm:text-lg font-medium text-[#173F2A] transition-all duration-300 hover:border-[#C97832] hover:text-[#C97832] active:scale-[0.98]"
+              className="group inline-flex min-h-12 w-full items-center justify-center gap-2.5 rounded-lg border border-[#DDE5DC] bg-transparent px-6 py-3.5 sm:w-auto sm:px-7 sm:py-4 text-base sm:text-lg font-medium text-[#173F2A] transition-all duration-300 hover:border-[#C97832] hover:text-[#C97832] active:scale-[0.98]"
             >
               <i className="bi bi-images text-sm sm:text-base transition-transform duration-300 group-hover:scale-110" aria-hidden="true" />
               <span>Ver projetos</span>

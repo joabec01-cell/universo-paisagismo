@@ -34,6 +34,8 @@ export const WHATSAPP_MESSAGES = {
     "Olá! Vim pelo site e gostaria de solicitar uma avaliação do meu espaço.",
   estudo3d:
     "Olá! Vim pelo site e gostaria de solicitar um estudo 3D do meu espaço.",
+  consultoria:
+    "Olá! Vim pelo site da Universo Paisagismo e preciso de consultoria.",
 } as const;
 
 /** URL padrão para CTAs de “Solicitar orçamento” */

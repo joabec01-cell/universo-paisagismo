@@ -92,7 +92,7 @@ export function TestimonialsSection() {
   };
 
   return (
-    <section className="relative border-b border-[#E2E8DF] bg-[#FAF9F5] py-24 sm:py-28 lg:py-32 overflow-hidden">
+    <section className="relative border-b border-[#E2E8DF] bg-[#FAF9F5] py-16 sm:py-28 lg:py-32 overflow-hidden">
       {/* Detalhe de fundo suave */}
       <div
         className="pointer-events-none absolute -left-20 top-1/2 h-[420px] w-[420px] -translate-y-1/2 rounded-full bg-[#8A9B7A]/8 blur-3xl"
@@ -193,7 +193,7 @@ export function TestimonialsSection() {
                         key={vid.id}
                         type="button"
                         onClick={() => handleSelectVideo(idx)}
-                        className={`group flex items-center gap-2 whitespace-nowrap rounded-xl px-3.5 py-2 text-xs font-medium transition-all duration-300 ${
+                        className={`group flex min-h-11 items-center gap-2 whitespace-nowrap rounded-xl px-3.5 py-2 text-sm font-medium transition-all duration-300 ${
                           isActive
                             ? "bg-[#0D1F16] text-[#FAF9F5] shadow-sm"
                             : "bg-white/80 text-[#526B45] border border-[#DDE5DC] hover:border-[#C49A63]/50 hover:text-[#0D1F16]"

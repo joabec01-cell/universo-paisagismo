@@ -1,25 +1,23 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import Image from "next/image";
 import { Reveal } from "@/components/Reveal";
-import { LazyVideo } from "@/components/LazyVideo";
 
 // ============================================================================
 // CONFIGURAÇÃO DOS ARQUIVOS E DADOS DAS OBRAS RECENTES
-// Substitua facilmente os caminhos abaixo pelos arquivos reais definitivos
 // ============================================================================
 export const recentProjectsData = {
-  // PROJETO 01 — DESTAQUE PRINCIPAL (Vídeo em loop ou Fotografia em movimento)
+  // PROJETO 01 — DESTAQUE PRINCIPAL
   project01: {
     id: "projeto-01",
-    category: "RESIDENCIAL · BELO HORIZONTE",
-    title: "Paisagismo completo e transformação de área externa",
-    mediaType: "video" as const,
-    // [VIDEO_PROJETO_PRINCIPAL]
-    src: "/hero/hero 01.mp4",
-    poster: "/posters/hero-01.jpg",
-    alt: "Vídeo do projeto principal de paisagismo — Universo Paisagismo",
+    category: "COMERCIAL · FLORIANÓPOLIS",
+    title: "Jardim feito no Noka Sushi",
+    mediaType: "image" as const,
+    src: "/pasta de imagem 01/WhatsApp Image 2026-09-26 at 19.00.42.jpeg",
+    alt: "Jardim do Noka Sushi em Florianópolis — Universo Paisagismo",
     href: "/portfolio",
     objectPosition: "center center",
   },
@@ -27,12 +25,11 @@ export const recentProjectsData = {
   // PROJETO 02 — SECUNDÁRIO SUPERIOR
   project02: {
     id: "projeto-02",
-    category: "COMERCIAL · LOURDES",
-    title: "Jardim Corporativo e Recepção",
+    category: "RESIDENCIAL · BELO HORIZONTE",
+    title: "Jardim residencial",
     mediaType: "image" as const,
-    // [IMAGEM_PROJETO_02]
-    src: "/portfolio/01.jpeg",
-    alt: "Jardim Corporativo — Universo Paisagismo",
+    src: "/before-after/b3.jpeg",
+    alt: "Jardim residencial em Belo Horizonte — Universo Paisagismo",
     href: "/portfolio",
     objectPosition: "center center",
   },
@@ -40,12 +37,11 @@ export const recentProjectsData = {
   // PROJETO 03 — SECUNDÁRIO INFERIOR
   project03: {
     id: "projeto-03",
-    category: "RESIDENCIAL · NOVA LIMA",
-    title: "Composição com Espécies Nativas e Pedras",
+    category: "RESIDENCIAL · BELO HORIZONTE",
+    title: "Jardim em Belo Horizonte",
     mediaType: "image" as const,
-    // [IMAGEM_PROJETO_03]
-    src: "/portfolio/02.jpeg",
-    alt: "Paisagismo com Espécies Nativas — Universo Paisagismo",
+    src: "/before-after/c3.jpeg",
+    alt: "Jardim em Belo Horizonte — Universo Paisagismo",
     href: "/portfolio",
     objectPosition: "center center",
   },
@@ -53,12 +49,11 @@ export const recentProjectsData = {
   // PROJETO 04 — BASE ESQUERDA
   project04: {
     id: "projeto-04",
-    category: "RESIDENCIAL · PAMPULHA",
-    title: "Integração Gourmet, Piscina e Jardim Tropical",
+    category: "RESIDENCIAL · BELO HORIZONTE",
+    title: "Jardim feito em um apartamento",
     mediaType: "image" as const,
-    // [IMAGEM_PROJETO_04]
-    src: "/about/01.jpeg",
-    alt: "Integração Gourmet e Piscina — Universo Paisagismo",
+    src: "/pasta de imagem 01/03.jpeg",
+    alt: "Jardim em apartamento em Belo Horizonte — Universo Paisagismo",
     href: "/portfolio",
     objectPosition: "center center",
   },
@@ -66,22 +61,44 @@ export const recentProjectsData = {
   // PROJETO 05 — BASE DIREITA
   project05: {
     id: "projeto-05",
-    category: "INTERIORES · SAVASSI",
-    title: "Jardim de Inverno e Circulação com Iluminação",
+    category: "RESIDENCIAL · JABOTICATUBAS",
+    title: "Jardim feito em um sítio",
     mediaType: "image" as const,
-    // [IMAGEM_PROJETO_05]
-    src: "/hero-paisagem.png",
-    alt: "Jardim de Inverno — Universo Paisagismo",
+    src: "/pasta de imagem 01/01.jpeg",
+    alt: "Jardim em sítio em Jaboticatubas — Universo Paisagismo",
     href: "/portfolio",
     objectPosition: "center center",
   },
 };
 
+type RecentProject = (typeof recentProjectsData)[keyof typeof recentProjectsData];
+
 export function RecentProjectsSection() {
   const { project01, project02, project03, project04, project05 } = recentProjectsData;
+  const [active, setActive] = useState<RecentProject | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!active) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setActive(null);
+    };
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [active]);
 
   return (
-    <section className="relative border-b border-[#E2E8DF] bg-[#FAF9F5] py-24 sm:py-28 lg:py-32 overflow-hidden">
+    <>
+    <section className="relative border-b border-[#E2E8DF] bg-[#FAF9F5] py-16 sm:py-28 lg:py-32 overflow-hidden">
       <div className="mx-auto max-w-6xl px-5 sm:px-6 md:px-8">
         {/* 1. CABEÇALHO DA SEÇÃO */}
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
@@ -130,16 +147,19 @@ export function RecentProjectsSection() {
           <div className="grid gap-6 lg:grid-cols-12 items-stretch">
             {/* PROJETO 01 — DESTAQUE PRINCIPAL COM VÍDEO (7 colunas de 12) */}
             <Reveal delayMs={120} className="lg:col-span-7 h-full">
-              <Link
-                href={project01.href}
-                className="group relative block h-[300px] sm:h-[360px] lg:h-full min-h-[300px] sm:min-h-[360px] lg:min-h-[416px] w-full overflow-hidden rounded-2xl border border-[#DDE5DC] bg-[#0D1F16] shadow-[0_16px_40px_rgba(13,31,22,0.08)] transition-all duration-500 hover:border-[#C49A63]/50 hover:shadow-[0_24px_55px_rgba(13,31,22,0.16)]"
+              <button
+                type="button"
+                onClick={() => setActive(project01)}
+                aria-label={`Ampliar ${project01.title}`}
+                className="group relative block cursor-zoom-in text-left h-[300px] sm:h-[360px] lg:h-full min-h-[300px] sm:min-h-[360px] lg:min-h-[416px] w-full overflow-hidden rounded-2xl border border-[#DDE5DC] bg-[#0D1F16] shadow-[0_16px_40px_rgba(13,31,22,0.08)] transition-all duration-500 hover:border-[#C49A63]/50 hover:shadow-[0_24px_55px_rgba(13,31,22,0.16)]"
               >
-                {/* Vídeo / Fotografia em movimento */}
-                <LazyVideo
+                <Image
                   src={project01.src}
-                  poster={project01.poster}
-                  style={{ objectPosition: project01.objectPosition }}
-                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                  alt={project01.alt}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 58vw"
+                  style={{ objectFit: "cover", objectPosition: project01.objectPosition }}
+                  className="h-full w-full object-cover"
                 />
 
                 {/* Gradiente sutil inferior para legibilidade tipográfica */}
@@ -177,16 +197,18 @@ export function RecentProjectsSection() {
                     <i className="bi bi-arrow-up-right text-sm sm:text-base" />
                   </div>
                 </div>
-              </Link>
+              </button>
             </Reveal>
 
             {/* COLUNA DIREITA: PROJETO 02 & PROJETO 03 (5 colunas de 12) */}
             <div className="lg:col-span-5 flex flex-col gap-6 justify-between">
               {/* PROJETO 02 */}
               <Reveal delayMs={200} className="flex-1">
-                <Link
-                  href={project02.href}
-                  className="group relative block aspect-[16/10] sm:aspect-[16/9] lg:aspect-auto lg:h-[196px] w-full overflow-hidden rounded-2xl border border-[#DDE5DC] bg-[#0D1F16] shadow-[0_12px_32px_rgba(13,31,22,0.06)] transition-all duration-500 hover:border-[#C49A63]/50 hover:shadow-[0_18px_45px_rgba(13,31,22,0.12)]"
+                <button
+                  type="button"
+                  onClick={() => setActive(project02)}
+                  aria-label={`Ampliar ${project02.title}`}
+                  className="group relative block cursor-zoom-in text-left aspect-[16/10] sm:aspect-[16/9] lg:aspect-auto lg:h-[196px] w-full overflow-hidden rounded-2xl border border-[#DDE5DC] bg-[#0D1F16] shadow-[0_12px_32px_rgba(13,31,22,0.06)] transition-all duration-500 hover:border-[#C49A63]/50 hover:shadow-[0_18px_45px_rgba(13,31,22,0.12)]"
                 >
                   <Image
                     src={project02.src}
@@ -194,7 +216,7 @@ export function RecentProjectsSection() {
                     fill
                     sizes="(max-width: 1024px) 100vw, 42vw"
                     style={{ objectFit: "cover", objectPosition: project02.objectPosition }}
-                    className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                    className="h-full w-full object-cover"
                   />
 
                   <div
@@ -218,14 +240,16 @@ export function RecentProjectsSection() {
                       <i className="bi bi-arrow-up-right text-xs sm:text-sm" />
                     </div>
                   </div>
-                </Link>
+                </button>
               </Reveal>
 
               {/* PROJETO 03 */}
               <Reveal delayMs={280} className="flex-1">
-                <Link
-                  href={project03.href}
-                  className="group relative block aspect-[16/10] sm:aspect-[16/9] lg:aspect-auto lg:h-[196px] w-full overflow-hidden rounded-2xl border border-[#DDE5DC] bg-[#0D1F16] shadow-[0_12px_32px_rgba(13,31,22,0.06)] transition-all duration-500 hover:border-[#C49A63]/50 hover:shadow-[0_18px_45px_rgba(13,31,22,0.12)]"
+                <button
+                  type="button"
+                  onClick={() => setActive(project03)}
+                  aria-label={`Ampliar ${project03.title}`}
+                  className="group relative block cursor-zoom-in text-left aspect-[16/10] sm:aspect-[16/9] lg:aspect-auto lg:h-[196px] w-full overflow-hidden rounded-2xl border border-[#DDE5DC] bg-[#0D1F16] shadow-[0_12px_32px_rgba(13,31,22,0.06)] transition-all duration-500 hover:border-[#C49A63]/50 hover:shadow-[0_18px_45px_rgba(13,31,22,0.12)]"
                 >
                   <Image
                     src={project03.src}
@@ -233,7 +257,7 @@ export function RecentProjectsSection() {
                     fill
                     sizes="(max-width: 1024px) 100vw, 42vw"
                     style={{ objectFit: "cover", objectPosition: project03.objectPosition }}
-                    className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                    className="h-full w-full object-cover"
                   />
 
                   <div
@@ -257,7 +281,7 @@ export function RecentProjectsSection() {
                       <i className="bi bi-arrow-up-right text-xs sm:text-sm" />
                     </div>
                   </div>
-                </Link>
+                </button>
               </Reveal>
             </div>
           </div>
@@ -266,9 +290,11 @@ export function RecentProjectsSection() {
           <div className="grid gap-6 lg:grid-cols-12">
             {/* PROJETO 04 */}
             <Reveal delayMs={340} className="lg:col-span-6">
-              <Link
-                href={project04.href}
-                className="group relative block aspect-[16/10] sm:aspect-[16/9] lg:aspect-[16/10] w-full overflow-hidden rounded-2xl border border-[#DDE5DC] bg-[#0D1F16] shadow-[0_12px_32px_rgba(13,31,22,0.06)] transition-all duration-500 hover:border-[#C49A63]/50 hover:shadow-[0_18px_45px_rgba(13,31,22,0.12)]"
+              <button
+                type="button"
+                onClick={() => setActive(project04)}
+                aria-label={`Ampliar ${project04.title}`}
+                className="group relative block cursor-zoom-in text-left aspect-[16/10] sm:aspect-[16/9] lg:aspect-[16/10] w-full overflow-hidden rounded-2xl border border-[#DDE5DC] bg-[#0D1F16] shadow-[0_12px_32px_rgba(13,31,22,0.06)] transition-all duration-500 hover:border-[#C49A63]/50 hover:shadow-[0_18px_45px_rgba(13,31,22,0.12)]"
               >
                 <Image
                   src={project04.src}
@@ -276,7 +302,7 @@ export function RecentProjectsSection() {
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   style={{ objectFit: "cover", objectPosition: project04.objectPosition }}
-                  className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                  className="h-full w-full object-cover"
                 />
 
                 <div
@@ -300,14 +326,16 @@ export function RecentProjectsSection() {
                     <i className="bi bi-arrow-up-right text-sm" />
                   </div>
                 </div>
-              </Link>
+              </button>
             </Reveal>
 
             {/* PROJETO 05 */}
             <Reveal delayMs={400} className="lg:col-span-6">
-              <Link
-                href={project05.href}
-                className="group relative block aspect-[16/10] sm:aspect-[16/9] lg:aspect-[16/10] w-full overflow-hidden rounded-2xl border border-[#DDE5DC] bg-[#0D1F16] shadow-[0_12px_32px_rgba(13,31,22,0.06)] transition-all duration-500 hover:border-[#C49A63]/50 hover:shadow-[0_18px_45px_rgba(13,31,22,0.12)]"
+              <button
+                type="button"
+                onClick={() => setActive(project05)}
+                aria-label={`Ampliar ${project05.title}`}
+                className="group relative block cursor-zoom-in text-left aspect-[16/10] sm:aspect-[16/9] lg:aspect-[16/10] w-full overflow-hidden rounded-2xl border border-[#DDE5DC] bg-[#0D1F16] shadow-[0_12px_32px_rgba(13,31,22,0.06)] transition-all duration-500 hover:border-[#C49A63]/50 hover:shadow-[0_18px_45px_rgba(13,31,22,0.12)]"
               >
                 <Image
                   src={project05.src}
@@ -315,7 +343,7 @@ export function RecentProjectsSection() {
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   style={{ objectFit: "cover", objectPosition: project05.objectPosition }}
-                  className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                  className="h-full w-full object-cover"
                 />
 
                 <div
@@ -339,7 +367,7 @@ export function RecentProjectsSection() {
                     <i className="bi bi-arrow-up-right text-sm" />
                   </div>
                 </div>
-              </Link>
+              </button>
             </Reveal>
           </div>
         </div>
@@ -356,5 +384,50 @@ export function RecentProjectsSection() {
         </div>
       </div>
     </section>
+    {mounted && active
+      ? createPortal(
+          <div
+            className="fixed inset-0 flex items-center justify-center p-4 sm:p-8"
+            style={{ backgroundColor: "#070f0c", zIndex: 90 }}
+            role="dialog"
+            aria-modal="true"
+            aria-label={active.title}
+            onClick={() => setActive(null)}
+          >
+            <button
+              type="button"
+              autoFocus
+              aria-label="Fechar imagem"
+              onClick={() => setActive(null)}
+              className="absolute right-[max(1rem,env(safe-area-inset-right))] top-[max(1rem,env(safe-area-inset-top))] z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/25 bg-[#0D1F16]/70 text-[#FAF9F5] backdrop-blur-md transition-colors hover:bg-[#B9683A]"
+            >
+              <i className="bi bi-x-lg text-lg" aria-hidden="true" />
+            </button>
+            <figure
+              className="flex max-h-full w-full max-w-6xl flex-col items-center gap-4"
+              onClick={(event) => event.stopPropagation()}
+            >
+              <div className="relative h-[min(78vh,900px)] w-full">
+                <Image
+                  src={active.src}
+                  alt={active.alt}
+                  fill
+                  sizes="96vw"
+                  className="object-contain"
+                  priority
+                />
+              </div>
+              <figcaption className="text-center">
+                <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#C49A63]">
+                  {active.category}
+                </p>
+                <p className="mt-1 font-serif text-xl text-[#FAF9F5] sm:text-2xl">{active.title}</p>
+              </figcaption>
+            </figure>
+          </div>,
+          document.body
+        )
+      : null}
+    </>
   );
 }
