@@ -47,7 +47,7 @@ const CARD_RATIO = 1.5; // card width / height
 const STEP = 40; // degrees between cards on the drum
 const DRUM = 2.05; // drum radius, in card heights - and everything below likewise
 const LENS = 2.7; // perspective distance
-const RING_R = 1.05; // ring radius
+const RING_R = 0.82; // ring radius
 /* The drum alone hangs the work on a plumb line. It isn't one: the strip curves
    away round an arc whose centre sits off to the LEFT, so the piece at the front
    is at the arc's near point - dead centre - and its neighbours have already
@@ -154,7 +154,7 @@ export function WorksWheel({
     const cardMaxW = narrow ? 0.9 : CARD_MAX_W;
     const cardRatio = narrow ? 1.28 : CARD_RATIO;
     const drumMul = narrow ? 1.72 : DRUM;
-    const ringMul = narrow ? 0.92 : RING_R;
+    const ringMul = narrow ? 0.7 : RING_R;
     const bowMul = narrow ? 1.15 : BOW;
     const titleMul = narrow ? 0.07 : TITLE;
     const indexMul = narrow ? 0.028 : INDEX;
@@ -415,11 +415,11 @@ export function WorksWheel({
         ))}
       </ol>
 
-      <div className="pointer-events-none absolute inset-x-0 bottom-[max(1.25rem,env(safe-area-inset-bottom))] z-10 flex flex-col items-center gap-3 md:hidden">
+      <div className="pointer-events-none absolute inset-x-0 bottom-[max(1rem,env(safe-area-inset-bottom))] z-10 flex flex-col items-center gap-2.5 md:hidden">
         <p className="font-mono text-xs tracking-[0.2em] text-[#C49A63]">
           {String(active + 1).padStart(2, "0")} / {String(count).padStart(2, "0")}
         </p>
-        <div className="flex max-w-[90vw] flex-wrap justify-center gap-1.5 px-4">
+        <div className="pointer-events-auto flex max-w-[92vw] gap-1.5 overflow-x-auto px-4 pb-0.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {items.map((item, i) => (
             <button
               key={`dot-${item.image}-${i}`}
@@ -427,7 +427,7 @@ export function WorksWheel({
               aria-label={`Ir para imagem ${item.title}`}
               onClick={() => to(i + 1)}
               className={cn(
-                "pointer-events-auto h-2.5 w-2.5 rounded-full transition-colors",
+                "h-2.5 w-2.5 shrink-0 rounded-full transition-colors",
                 i === active ? "bg-[#FAF9F5]" : "bg-[#C49A63]/45",
               )}
             />

@@ -20,14 +20,14 @@ const beliefs = [
 export default function SobrePage() {
   return (
     <div>
-      <section className="border-b border-line py-12 sm:py-20 md:py-28">
-        <div className="mx-auto max-w-6xl px-5 md:px-8">
+      <section className="border-b border-line py-10 sm:py-20 md:py-28">
+        <div className="mx-auto max-w-6xl px-4 sm:px-5 md:px-8">
           <Reveal>
             <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted">Sobre</p>
-            <h1 className="mt-4 max-w-3xl font-serif text-3xl tracking-tight text-ink sm:text-4xl md:text-6xl md:leading-[1.05]">
+            <h1 className="mt-4 max-w-3xl font-serif text-[1.85rem] tracking-tight text-ink sm:text-4xl md:text-6xl md:leading-[1.05]">
               Universo Paisagismo
             </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
+            <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted sm:mt-6 sm:text-lg">
               Atuamos em Belo Horizonte e região metropolitana com foco em projeto
               paisagístico, revitalização de áreas externas, execução e manutenção de jardins
               residenciais e comerciais.
@@ -36,8 +36,8 @@ export default function SobrePage() {
         </div>
       </section>
 
-      <section className="py-20 md:py-28">
-        <div className="mx-auto grid max-w-6xl gap-14 px-5 md:grid-cols-2 md:items-center md:gap-16 md:px-8">
+      <section className="py-12 sm:py-20 md:py-28">
+        <div className="mx-auto grid max-w-6xl gap-10 px-4 sm:gap-14 sm:px-5 md:grid-cols-2 md:items-center md:gap-16 md:px-8">
           <Reveal>
             <h2 className="font-serif text-3xl tracking-tight text-ink md:text-4xl">
               O que nos guia

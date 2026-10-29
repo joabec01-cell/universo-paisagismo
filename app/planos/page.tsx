@@ -13,14 +13,14 @@ export const metadata: Metadata = {
 export default function PlanosPage() {
   return (
     <div className="border-b border-line">
-      <section className="border-b border-line py-12 sm:py-20 md:py-28">
-        <div className="mx-auto max-w-6xl px-5 md:px-8">
+      <section className="border-b border-line py-10 sm:py-20 md:py-28">
+        <div className="mx-auto max-w-6xl px-4 sm:px-5 md:px-8">
           <Reveal>
             <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted">Planos</p>
-            <h1 className="mt-4 max-w-3xl font-serif text-3xl tracking-tight text-ink sm:text-4xl md:text-6xl md:leading-[1.05]">
+            <h1 className="mt-4 max-w-3xl font-serif text-[1.85rem] tracking-tight text-ink sm:text-4xl md:text-6xl md:leading-[1.05]">
               Escolha por etapa ou pacote fechado
             </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
+            <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted sm:mt-6 sm:text-lg">
               Valores e prazos variam conforme metragem, topografia e nível de detalhamento.
               Use estes planos como ponto de partida na conversa.
             </p>
@@ -28,13 +28,13 @@ export default function PlanosPage() {
         </div>
       </section>
 
-      <section className="py-16 md:py-24">
-        <div className="mx-auto max-w-6xl px-5 md:px-8">
-          <div className="grid gap-6 lg:grid-cols-3">
+      <section className="py-10 sm:py-16 md:py-24">
+        <div className="mx-auto max-w-6xl px-4 sm:px-5 md:px-8">
+          <div className="grid gap-5 sm:gap-6 lg:grid-cols-3">
             {planos.map((plano, i) => (
               <Reveal key={plano.id} delayMs={i * 60}>
                 <article
-                  className={`flex h-full flex-col border bg-white p-8 md:p-10 ${
+                  className={`flex h-full flex-col border bg-white p-5 sm:p-8 md:p-10 ${
                     plano.highlight
                       ? "border-brand shadow-[0_2px_12px_rgba(61,111,86,0.12)]"
                       : "border-line"

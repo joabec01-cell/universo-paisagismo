@@ -19,7 +19,7 @@ const navLinks = [
 export function SiteFooter() {
   return (
     <footer className="border-t border-[#1F3327] bg-[#0D1F16] text-[#FAF9F5]">
-      <div className="mx-auto max-w-6xl px-5 pb-28 pt-16 sm:py-20 md:px-8">
+      <div className="mx-auto max-w-6xl px-4 pb-[max(7rem,calc(5.5rem+env(safe-area-inset-bottom)))] pt-14 sm:px-5 sm:py-20 md:px-8">
         {/* Grid Principal com 4 Colunas */}
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-12 lg:gap-10">
           {/* 1. UNIVERSO PAISAGISMO (Logo + Frase institucional) - 4 colunas */}
