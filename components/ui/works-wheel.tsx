@@ -47,7 +47,7 @@ const CARD_RATIO = 1.5; // card width / height
 const STEP = 40; // degrees between cards on the drum
 const DRUM = 2.05; // drum radius, in card heights - and everything below likewise
 const LENS = 2.7; // perspective distance
-const RING_R = 0.82; // ring radius
+const RING_R = 0.52; // ring radius (capped further against the stage below)
 /* The drum alone hangs the work on a plumb line. It isn't one: the strip curves
    away round an arc whose centre sits off to the LEFT, so the piece at the front
    is at the arc's near point - dead centre - and its neighbours have already
@@ -154,7 +154,7 @@ export function WorksWheel({
     const cardMaxW = narrow ? 0.9 : CARD_MAX_W;
     const cardRatio = narrow ? 1.28 : CARD_RATIO;
     const drumMul = narrow ? 1.72 : DRUM;
-    const ringMul = narrow ? 0.7 : RING_R;
+    const ringMul = narrow ? 0.42 : RING_R;
     const bowMul = narrow ? 1.15 : BOW;
     const titleMul = narrow ? 0.07 : TITLE;
     const indexMul = narrow ? 0.028 : INDEX;
@@ -162,11 +162,14 @@ export function WorksWheel({
     const cardW = Math.min(h * cardHFrac * cardRatio, w * cardMaxW);
     const cardH = cardW / cardRatio;
     const drumR = cardH * drumMul;
-    const ringR = cardH * ringMul;
+    // Keep the opening ring inside the viewport: radius is limited by the
+    // shorter stage edge so the circle never spills past the frame.
+    const ringFit = Math.min(w, h) * (narrow ? 0.18 : 0.22);
+    const ringR = Math.min(cardH * ringMul, ringFit);
     // Shrink the ring's cards until the circle reads as a closed loop rather
     // than beads on a wire, however many pieces the wheel is given.
     const ringScale = count
-      ? clamp((((2 * Math.PI * ringR) / count) * 0.82) / (cardW || 1), 0.16, 1)
+      ? clamp((((2 * Math.PI * ringR) / count) * 0.78) / (cardW || 1), 0.12, 1)
       : 1;
     return {
       cardW,
@@ -176,7 +179,10 @@ export function WorksWheel({
       drumR,
       bow: cardH * bowMul,
       depth: cardH * LENS,
-      title: Math.max(cardH * titleMul, narrow ? 18 : 14),
+      title: Math.min(
+        Math.max(cardH * titleMul, narrow ? 16 : 14),
+        narrow ? 22 : cardH * titleMul + 8,
+      ),
       index: Math.max(cardH * indexMul, 11),
       narrow,
     };
