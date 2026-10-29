@@ -46,11 +46,11 @@ export function PortfolioItemCard({ item }: { item: PortfolioItem }) {
         className="aspect-[16/11]"
         sizes="(max-width: 768px) 100vw, 50vw"
       />
-      <div className="flex flex-1 flex-col p-8 md:p-10">
+      <div className="flex flex-1 flex-col p-5 sm:p-8 md:p-10">
         <span className="inline-flex w-fit rounded-full bg-accent-soft px-2.5 py-0.5 font-mono text-[11px] uppercase tracking-wider text-accent">
           {item.tag}
         </span>
-        <h2 className="mt-5 font-serif text-2xl tracking-tight text-ink">{item.title}</h2>
+        <h2 className="mt-4 font-serif text-xl tracking-tight text-ink sm:mt-5 sm:text-2xl">{item.title}</h2>
         <p className="mt-3 flex-1 text-sm leading-relaxed text-muted">{item.description}</p>
         {images.length > 0 ? (
           <p className="mt-5 font-mono text-[11px] uppercase tracking-[0.18em] text-[#C97832]">
@@ -95,18 +95,20 @@ export function PortfolioItemCard({ item }: { item: PortfolioItem }) {
       {mounted && open
         ? createPortal(
             <div
-              className="fixed inset-0 flex flex-col"
+              className="fixed inset-0 flex flex-col overscroll-none"
               style={{ backgroundColor: "#070f0c", zIndex: 90 }}
               role="dialog"
               aria-modal="true"
               aria-label={item.title}
             >
-              <div className="relative z-10 flex items-center justify-between gap-4 px-4 py-4 pt-[max(1rem,env(safe-area-inset-top))] sm:px-8">
-                <div>
-                  <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#C49A63]">
+              <div className="relative z-10 flex shrink-0 items-center justify-between gap-3 px-4 py-3 pt-[max(0.75rem,env(safe-area-inset-top))] sm:gap-4 sm:px-8 sm:py-4">
+                <div className="min-w-0">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#C49A63] sm:text-[11px]">
                     {item.tag}
                   </p>
-                  <p className="mt-1 font-serif text-xl text-[#FAF9F5] sm:text-2xl">{item.title}</p>
+                  <p className="mt-0.5 truncate font-serif text-lg text-[#FAF9F5] sm:mt-1 sm:text-2xl">
+                    {item.title}
+                  </p>
                 </div>
                 <button
                   type="button"
@@ -118,7 +120,7 @@ export function PortfolioItemCard({ item }: { item: PortfolioItem }) {
                   <i className="bi bi-x-lg text-lg" aria-hidden="true" />
                 </button>
               </div>
-              <div className="min-h-0 flex-1">
+              <div className="min-h-0 flex-1 pb-[env(safe-area-inset-bottom)]">
                 <WorksWheel items={wheelItems} label={item.title} className="h-full min-h-0" />
               </div>
             </div>,

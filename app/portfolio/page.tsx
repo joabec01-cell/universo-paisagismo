@@ -13,16 +13,16 @@ export const metadata: Metadata = {
 export default function PortfolioPage() {
   return (
     <div className="border-b border-line">
-      <section className="border-b border-line py-12 sm:py-20 md:py-28">
-        <div className="mx-auto max-w-6xl px-5 md:px-8">
+      <section className="border-b border-line py-10 sm:py-20 md:py-28">
+        <div className="mx-auto max-w-6xl px-4 sm:px-5 md:px-8">
           <Reveal>
             <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted">
               Portfólio
             </p>
-            <h1 className="mt-4 max-w-3xl font-serif text-3xl tracking-tight text-ink sm:text-4xl md:text-6xl md:leading-[1.05]">
+            <h1 className="mt-4 max-w-3xl font-serif text-[1.85rem] tracking-tight text-ink sm:text-4xl md:text-6xl md:leading-[1.05]">
               Trabalhos selecionados
             </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
+            <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted sm:mt-6 sm:text-lg">
               Uma amostra de escala, clima e tipologia. Fotos de campo e estudos 3D integram
               o mesmo processo.
             </p>
@@ -30,9 +30,9 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      <section className="py-16 md:py-24">
-        <div className="mx-auto max-w-6xl px-5 md:px-8">
-          <div className="grid gap-8 md:grid-cols-2">
+      <section className="py-10 sm:py-16 md:py-24">
+        <div className="mx-auto max-w-6xl px-4 sm:px-5 md:px-8">
+          <div className="grid gap-5 sm:gap-8 md:grid-cols-2">
             {portfolioItems.map((item, i) => (
               <Reveal key={item.slug} delayMs={(i % 4) * 50}>
                 <PortfolioItemCard item={item} />

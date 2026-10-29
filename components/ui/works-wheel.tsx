@@ -41,21 +41,21 @@ export interface WorksWheelProps extends Omit<
    swinging on a huge drum. The three that matter are tuned together: STEP
    against DRUM sets how hard the neighbours rotate away, and DRUM against LENS
    decides whether they land inside the frame or run off it. */
-const CARD_H = 0.38; // front card height, of the stage
-const CARD_MAX_W = 0.34; // ... but never wider than this much of the stage
-const CARD_RATIO = 1.45; // card width / height
+const CARD_H = 0.62; // front card height, of the stage
+const CARD_MAX_W = 0.58; // ... but never wider than this much of the stage
+const CARD_RATIO = 1.5; // card width / height
 const STEP = 40; // degrees between cards on the drum
-const DRUM = 2.22; // drum radius, in card heights - and everything below likewise
+const DRUM = 2.05; // drum radius, in card heights - and everything below likewise
 const LENS = 2.7; // perspective distance
-const RING_R = 1.14; // ring radius
+const RING_R = 1.05; // ring radius
 /* The drum alone hangs the work on a plumb line. It isn't one: the strip curves
    away round an arc whose centre sits off to the LEFT, so the piece at the front
    is at the arc's near point - dead centre - and its neighbours have already
    swung back left as well as up and down. BOW is that arc's radius; nothing else
    makes the difference between a stack of cards and a wheel seen side on. */
-const BOW = 1.82;
-const TITLE = 0.124; // ring label and front-card title
-const INDEX = 0.04; // the index down the right-hand side
+const BOW = 1.55;
+const TITLE = 0.09; // ring label and front-card title
+const INDEX = 0.032; // the index down the right-hand side
 /** Items either side of the front still worth drawing. Past this a card is
     edge-on, and further round it would stack up on the vanishing point. */
 const CULL = 1.6;
@@ -147,10 +147,22 @@ export function WorksWheel({
 
   const metrics = React.useMemo(() => {
     const { w, h } = stage;
-    const cardW = Math.min(h * CARD_H * CARD_RATIO, w * CARD_MAX_W);
-    const cardH = cardW / CARD_RATIO;
-    const drumR = cardH * DRUM;
-    const ringR = cardH * RING_R;
+    // On phones the stage is tall and narrow: fill almost the full width so the
+    // front image reads large. On desktop keep the original cinematic frame.
+    const narrow = w > 0 && w < 768;
+    const cardHFrac = narrow ? 0.46 : CARD_H;
+    const cardMaxW = narrow ? 0.9 : CARD_MAX_W;
+    const cardRatio = narrow ? 1.28 : CARD_RATIO;
+    const drumMul = narrow ? 1.72 : DRUM;
+    const ringMul = narrow ? 0.92 : RING_R;
+    const bowMul = narrow ? 1.15 : BOW;
+    const titleMul = narrow ? 0.07 : TITLE;
+    const indexMul = narrow ? 0.028 : INDEX;
+
+    const cardW = Math.min(h * cardHFrac * cardRatio, w * cardMaxW);
+    const cardH = cardW / cardRatio;
+    const drumR = cardH * drumMul;
+    const ringR = cardH * ringMul;
     // Shrink the ring's cards until the circle reads as a closed loop rather
     // than beads on a wire, however many pieces the wheel is given.
     const ringScale = count
@@ -162,10 +174,11 @@ export function WorksWheel({
       ringR,
       ringScale,
       drumR,
-      bow: cardH * BOW,
+      bow: cardH * bowMul,
       depth: cardH * LENS,
-      title: cardH * TITLE,
-      index: cardH * INDEX,
+      title: Math.max(cardH * titleMul, narrow ? 18 : 14),
+      index: Math.max(cardH * indexMul, 11),
+      narrow,
     };
   }, [stage, count]);
 
@@ -277,7 +290,7 @@ export function WorksWheel({
         role="listbox"
         aria-label={label}
         aria-activedescendant={`works-wheel-${active}`}
-        className="absolute inset-0 cursor-grab touch-pan-x outline-none focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-[#C49A63] active:cursor-grabbing"
+        className="absolute inset-0 cursor-grab touch-none outline-none focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-[#C49A63] active:cursor-grabbing"
         style={{ perspective: `${metrics.depth}px` }}
         onPointerDown={(event) => {
           drag.current = event.clientY;
@@ -285,11 +298,16 @@ export function WorksWheel({
         }}
         onPointerMove={(event) => {
           if (drag.current === null) return;
-          to(target.current + (drag.current - event.clientY) / DRAG_UNITS);
+          const units = metrics.narrow ? DRAG_UNITS * 0.72 : DRAG_UNITS;
+          to(target.current + (drag.current - event.clientY) / units);
           drag.current = event.clientY;
         }}
         onPointerUp={() => {
           // Land on an item rather than between two.
+          drag.current = null;
+          if (target.current > 1) to(Math.round(target.current));
+        }}
+        onPointerCancel={() => {
           drag.current = null;
           if (target.current > 1) to(Math.round(target.current));
         }}
@@ -364,21 +382,21 @@ export function WorksWheel({
           proportions inside a card as well as at full bleed. */}
       <div
         ref={labelRef}
-        className="pointer-events-none absolute inset-0 grid place-items-center font-serif tracking-tight text-[#FAF9F5]"
+        className="pointer-events-none absolute inset-0 grid place-items-center px-6 text-center font-serif tracking-tight text-[#FAF9F5]"
         style={{ fontSize: metrics.title }}
       >
         {label}
       </div>
       <div
         ref={titleRef}
-        className="pointer-events-none absolute top-1/2 left-[8%] -translate-y-1/2 font-serif tracking-tight text-[#FAF9F5] opacity-0"
+        className="pointer-events-none absolute top-1/2 left-[3%] hidden -translate-y-1/2 font-serif tracking-tight text-[#FAF9F5] opacity-0 md:block md:left-[5%]"
         style={{ fontSize: metrics.title }}
       >
         {items[active]?.title}
       </div>
 
       <ol
-        className="absolute top-[7.5%] right-[2.5%] text-right font-mono leading-[1.75] text-[#C49A63]/70"
+        className="absolute top-[7.5%] right-[2.5%] hidden max-h-[70%] overflow-y-auto text-right font-mono leading-[1.75] text-[#C49A63]/70 md:block"
         style={{ fontSize: metrics.index }}
       >
         {items.map((item, i) => (
@@ -396,6 +414,27 @@ export function WorksWheel({
           </li>
         ))}
       </ol>
+
+      <div className="pointer-events-none absolute inset-x-0 bottom-[max(1.25rem,env(safe-area-inset-bottom))] z-10 flex flex-col items-center gap-3 md:hidden">
+        <p className="font-mono text-xs tracking-[0.2em] text-[#C49A63]">
+          {String(active + 1).padStart(2, "0")} / {String(count).padStart(2, "0")}
+        </p>
+        <div className="flex max-w-[90vw] flex-wrap justify-center gap-1.5 px-4">
+          {items.map((item, i) => (
+            <button
+              key={`dot-${item.image}-${i}`}
+              type="button"
+              aria-label={`Ir para imagem ${item.title}`}
+              onClick={() => to(i + 1)}
+              className={cn(
+                "pointer-events-auto h-2.5 w-2.5 rounded-full transition-colors",
+                i === active ? "bg-[#FAF9F5]" : "bg-[#C49A63]/45",
+              )}
+            />
+          ))}
+        </div>
+        <p className="text-[11px] text-[#C49A63]/80">Deslize para cima ou para baixo</p>
+      </div>
     </section>
   );
 }
